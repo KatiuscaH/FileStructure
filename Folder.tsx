@@ -28,3 +28,83 @@ const Folder = ({ files }) => {
 };
 
 export default Folder;
+
+/**
+Another exercise
+import { useState } from 'react';
+  const data = [
+    {
+      id: 1,
+      name: 'README.md',
+    },
+    {
+      id: 2,
+      name: 'Documents',
+      children: [
+        {
+          id: 3,
+          name: 'Word.doc',
+        },
+        {
+          id: 4,
+          name: 'Powerpoint.ppt',
+        },
+      ],
+    },
+    {
+      id: 5,
+      name: 'Downloads',
+      children: [
+        {
+          id: 6,
+          name: 'unnamed.txt',
+        },
+        {
+          id: 7,
+          name: 'Misc',
+          children: [
+            {
+              id: 8,
+              name: 'foo.txt',
+            },
+            {
+              id: 9,
+              name: 'bar.txt',
+            },
+          ],
+        },
+      ],
+    },
+  ];
+
+export default function FileExplorer({ data }) {
+  const [openDirectories, setOpenDirectories] = useState({});
+
+  const toggleDirectory = (id) => {
+    setOpenDirectories((prev) => ({
+      ...prev,
+      [id]: !prev[id], // Toggle the state of the directory with the given id
+    }));
+  };
+
+  return (
+    <div>
+      {data.map((e) => (
+        <div key={e.id}>
+          <h1 onClick={() => toggleDirectory(e.id)}>
+            {e.name}
+            {e.children ? (openDirectories[e.id] ? ' -' : ' +') : ''}
+          </h1>
+          {openDirectories[e.id] && e.children && (
+            <div style={{ marginLeft: '20px' }}>
+              <FileExplorer data={e.children} />
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+
+/
