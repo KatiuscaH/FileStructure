@@ -105,6 +105,4 @@ export default function FileExplorer({ data }) {
     </div>
   );
 }
-
-
-/
+*/
